@@ -8,6 +8,7 @@ urlpatterns = [
     path('',views.index,name='index'),  
     path('hood/(<location>)',views.single_hood,name='single_hood'),
     path('profile/(<username>)', views.profile, name='profile'),
+    path('registration_form/',views.signup,name='signup'),
     path("login/", views.login_request, name="login_link"),
     path("logout", views.logout_request, name= "logout"),
 ]

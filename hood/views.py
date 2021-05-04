@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from django.contrib.auth.models import User
 from .models import Posts,Profile,Neighbourhood,Business
 from django.http import Http404
-from .forms import BusinessForm,PostsForm
+from .forms import BusinessForm,PostsForm,NewUserForm
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
  
