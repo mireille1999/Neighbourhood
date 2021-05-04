@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+  <div class="row">
+    {% if businesses %}
+    <h3>Found {{ businesses|length }} </h3>
+    {% else %}
+    <h3>Found 0 businesees of searched term {{message}}</h3>
+    {% endif %}
+    <br>
+    <br>
+
+    <div class="row">
+        {% for project in projects %}
+        <div class="col-md-4">
+        <div class="card-group wow fadeInLeft"  style="margin:2%;" data-aos='fade-up'>
+                <div class="view overlay zoom ">
+                        <img src="{{project.image_landing.url}}" class="card-img-top">
+                        <div class="mask flex-center rgba-black-strong">
+                            <a href="{% url 'projects' project.pk %}" class="btn btn-pink" >VIEW <i class="far fa-chevron-double-right"></i>  </a>
+                        </div>
+                </div>
+        
+        <div class="card-body" style="border:2px #00BCD4;">
+            <a href="{% url 'projects' project.pk %}"><h5 class="strong-text"> <strong>{{project.title}}</strong> </h5> </a> <hr class="bg-info">
+
+      {% endfor %}
+
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+  {% endblock %}
+  <div class="footer">
+    <!-- Footer -->
+  <footer class="page-footer font-small unique-color-dark pt-4">
+  
+      <!-- Footer Elements -->
+      <div class="container">
+     
+        <!-- Call to action -->
+        <ul class="list-unstyled list-inline text-center py-2">
+          <li class="list-inline-item">
+            <h5 class="mb-1">Awwards <i class="fas fa-trophy"></i>  <br> Innovate,Create and Inspire</h5>
+          </li>
+          <li class="list-inline-item">
+            <a href="{% url 'signup' %}"class="btn btn-outline-white btn-rounded">Sign up!</a>
+          </li>
+        </ul>
+        <!-- Call to action -->
+     
+      </div>
+      <!-- Footer Elements -->
+     
+      <!-- Copyright -->
+      <div class="footer-copyright text-center py-3">© 2021 Copyright:
+        <a > Mireille Muhawenimana</a>
+      </div>
+      <!-- Copyright -->
+     
+     </footer>
+     <!-- Footer -->
+  
+  </div>
+  
+  
+  
+  
