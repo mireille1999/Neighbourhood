@@ -1,10 +1,17 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.models import User
-from .models import Posts,Profile,Neighbourhood,Business
-from django.http import Http404
-from .forms import BusinessForm,PostsForm,NewUserForm
+from .models import *
+from django.http import HttpResponse, Http404 
+from .forms import BusinessForm,PostsForm,NewUserForm,notificationsForm
 from django.contrib.auth.models import User
+from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
+from django.core.exceptions import ObjectDoesNotExist
+from django.contrib.auth.forms import AuthenticationForm 
+from django.contrib import messages
+import datetime as datetime
+import json
+from django.db.models import Q
  
 
 # Create your views here.
@@ -61,9 +68,8 @@ def single_hood(request,location):
 
 
 @login_required(login_url='/accounts/login/')
-def profile(request,username):
-    profile = User.objects.get(username=username)
-    
+def profile(request):
+    profile = request.user
     try:
         profile_details = Profile.get_by_id(profile.id)
     except:
@@ -134,3 +140,51 @@ def login_request(request):
             messages.error(request,"Invalid username or password.")
 
     return render(request=request, template_name="registration/login.html", context={"form":form})
+
+@login_required(login_url='/accounts/login/')
+def notification(request):
+    current_user = request.user
+    profile = Profile.objects.get(user=current_user)
+    all_notifications = notifications.objects.filter(neighbourhood=profile.neighbourhood)
+
+    return render(request, 'notifications.html', {"notifications":all_notifications})
+
+@login_required(login_url='/accounts/login/')
+def health(request):
+    current_user = request.user
+    profile = Profile.objects.get(user=current_user)
+    healthservices = Health.objects.filter(neighbourhood=profile.neighbourhood)
+
+    return render(request, 'health.html', {"healthservices":healthservices})
+
+@login_required(login_url='/accounts/login/')
+def authorities(request):
+    current_user=request.user
+    profile=Profile.objects.get(user=current_user)
+    authorities=Authorities.objects.filter(neighbourhood=profile.neighbourhood)
+
+    return render(request, 'authorities.html', {"authorities":authorities})
+
+
+@login_required(login_url='/accounts/login/')
+def new_notification(request):
+    current_user = request.user
+    profile = Profile.objects.get(user = current_user)
+
+    if request.method == "POST":
+        form = notificationsForm(request.POST, request.FILES)
+        if form.is_valid():
+            notification = form.save(commit=False)
+            notification.author = current_user
+            notification.neighbourhood = profile.neighbourhood
+            notification.save()
+
+            if notification.priority == 'High Priority':
+                send_priority_email(profile.name, profile.email, notification.title, notification.notification, notification.author, notification.neighbourhood)
+
+        return HttpResponseRedirect('/notifications')
+
+    else:
+        form = notificationsForm()
+
+    return render(request, 'notifications_form.html', {"form":form})

@@ -1,5 +1,5 @@
 {% extends 'registration/base.html' %}  
-{% load bootstrap4 %}
+{% load bootstrap3 %}
 {% block content %}
 <div class="row">
     <div class="col-md-4">
@@ -9,12 +9,12 @@
     font-family: sans-serif;margin-top: 20px;opacity:0.9;" width="500px" >
         <h2 style="border-bottom:6px solid #4DD0E1;margin-bottom: 10px;padding: 10px;" >Sign Up</h2>
       
-        <form action="/accounts/register/" method="POST" style="color:#757575;" class="login-box">
+        <form action="{% url 'signup' %}" method="POST" style="color:#757575;" class="login-box">
             {% csrf_token %}
             {% bootstrap_form form layout='inline' %}
 
             <div class="form-group">
-                <input type="submit" class="btn btn-success btn-rounded btn-lg  waves-effect text-center" value="Log In"
+                <input type="submit" class="btn btn-success btn-rounded btn-lg  waves-effect text-center" value="Sign Up"
                     style="text-align:center;">
             </div>
             <input type="hidden" name="next" value="/">

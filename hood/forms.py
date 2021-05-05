@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from .models import *
-
+from django.contrib.auth.models import User
 class BusinessForm(forms.ModelForm):
     class Meta:
         model = Business
@@ -26,5 +26,9 @@ class NewUserForm(UserCreationForm):
             user.save()
         return user
 
+class notificationsForm(forms.ModelForm):
+    class Meta:
+        model = notifications
+        exclude = ['author', 'neighbourhood', 'post_date']
    
    
