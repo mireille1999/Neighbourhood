@@ -70,6 +70,12 @@ After extracting the files,
 4. Running the application
 >``python3 manage.py runserver``
 
+## BEHAVIOUR DRIVEN DEVELOPMENT
+| GENERAL BEHAVIOUR | INPUT | OUTPUT|
+|:------------------|:--------|:-----------|
+|User wants to view a neighbourhood| User visit the website |Views a list of all current neighbourhoods|
+|User wants to view the neighbourhood descriptions|They click on the neighbourhood |Neighbourhood businesses are displayed|
+|User wants to post a business| They navigate to the neighbourhood and post a business|Businesses are shown and displayed|
 
 
 ## Contacts 
