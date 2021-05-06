@@ -1,6 +1,6 @@
 ## PROJECT  NAME 
  - Awwward
-![app](https://raw.githubusercontent.com/mireille1999/Awwward/main/media/2.png)
+![app](https://raw.githubusercontent.com/mireille1999/Neighbourhood/main/hood/static/img/homepage.png)
 ![app](https://raw.githubusercontent.com/mireille1999/Awwward/main/media/3.png)
 ![app](https://raw.githubusercontent.com/mireille1999/Awwward/main/media/1.png)
 
